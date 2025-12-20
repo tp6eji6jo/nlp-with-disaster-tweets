@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import joblib
 import re
+from pathlib import Path
 
 app = Flask(__name__)
 
@@ -11,8 +12,11 @@ def preprocess_for_tfidf(text):
     return text
 
 # 1. 載入模型
-model = joblib.load('disaster_model.pkl')
-vectorizer = joblib.load('tfidf_vectorizer.pkl')
+BASE_DIR = Path(__file__).resolve().parent
+model_path = BASE_DIR / "disaster_model.pkl"
+vectorizer_path = BASE_DIR / "tfidf_vectorizer.pkl"
+model = joblib.load(model_path)
+vectorizer = joblib.load(vectorizer_path)
 
 # 2. 定義清理函數
 def clean_text(text: str) -> str:

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>災難推文檢測器</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Disaster Tweet Detector</h1>
+        <p>請輸入一段英文推文來判斷是否為災難事件。</p>
+
+        <form action="/" method="POST">
+            <textarea name="tweet_text" placeholder="Example: There is a forest fire near my house..." required>{{ original_input }}</textarea>
+            <button type="submit">開始分析</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result-box" style="background-color: {{ color }};">
+            {{ prediction }}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
